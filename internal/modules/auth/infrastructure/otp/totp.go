@@ -14,6 +14,10 @@ func NewTotp() Otp {
 	return &totpOtp{}
 }
 
+func (obj *totpOtp) GetQR(ctx context.Context, params GetQrParams) (string, error) {
+	return "", nil
+}
+
 func (obj *totpOtp) GetCode(ctx context.Context, params GetCodeParams) (string, error) {
 	logger := logs.FromContext(ctx)
 
@@ -21,7 +25,7 @@ func (obj *totpOtp) GetCode(ctx context.Context, params GetCodeParams) (string, 
 	key, err := totp.Generate(totp.GenerateOpts{
 		Issuer:      params.Issuer,
 		AccountName: params.AccountName,
-		Period:      0,
+		Period:      params.Period,
 		SecretSize:  0,
 		Secret:      nil,
 		Digits:      0,

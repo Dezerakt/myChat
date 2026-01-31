@@ -13,9 +13,8 @@ type handler struct {
 func Init(r *gin.Engine, uc *usecase.Usecase) {
 	h := &handler{uc: uc}
 
-	otpAuth := r.Group("/otp")
+	auth := r.Group("/auth")
 	{
-		otpAuth.POST("/log-in", h.LogIn)
-		otpAuth.POST("/register-user", h.LogUp)
+		auth.POST("/register", h.Register)
 	}
 }
